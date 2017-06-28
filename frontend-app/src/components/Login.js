@@ -11,11 +11,12 @@ class Login extends Component {
 		const {loginUser} = this.props
 
 		return loginUser(props).then((res) => {
+			console.log(res)
 			if (res.error) {
 				const validation_msg = res.payload.response.data.messages
 
 				throw new SubmissionError({
-					name: [validation_msg.name],
+					email: [validation_msg.email],
 					password: [validation_msg.password]
 				})
 			} else {
@@ -24,7 +25,7 @@ class Login extends Component {
 		})
 	}
 
-	renderNameField({
+	renderEmailField({
 		input,
 		label,
 		type,
@@ -70,8 +71,8 @@ class Login extends Component {
 				<div className="column is-offset-one-third is-one-third">
 					<h1 className="title has-text-centered">Login</h1>
 					<form onSubmit={handleSubmit(this.onSubmit.bind(this))} className="column">
-						<Field label="Name" name="name" type="text" component={this.renderNameField} placeholder="Name"/>
-						<Field label="Password" name="password" type="password" component={this.renderPasswordField} placeholder="Name"/>
+						<Field label="Email" name="email" type="email" component={this.renderEmailField} placeholder="Email"/>
+						<Field label="Password" name="password" type="password" component={this.renderPasswordField} placeholder="Password"/>
 						<div className="field is-grouped is-pulled-right">
 							<div className="control">
 								<button className="button is-primary">Login</button>
@@ -92,8 +93,8 @@ Login.propTypes = {
 const validate = props => {
 	const errors = {}
 
-	if (!props.name) {
-		errors.name = "Requires"
+	if (!props.email) {
+		errors.email = "Requires"
 	} else if (!props.password) {
 		errors.password = "Requires"
 	}

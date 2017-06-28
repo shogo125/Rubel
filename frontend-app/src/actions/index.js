@@ -38,8 +38,7 @@ const api = axios.create({
 })
 
 export function loginUser(props) {
-	// TODO fix api endpoint
-	const request = api.post("/", props)
+	const request = api.post("/authenticate", props)
 
 	return {type: LOGIN_USER, payload: request}
 }
