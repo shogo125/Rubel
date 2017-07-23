@@ -4,11 +4,11 @@ import {reduxForm, Field, SubmissionError} from "redux-form"
 import {connect} from "react-redux"
 import {loginUser} from "../actions/index"
 import {Link} from "react-router"
-import {Loader} from "../utils/Loader"
+import Loader from "../utils/Loader"
 
 class Login extends Component {
 	onSubmit(props) {
-		const {loginUser} = this.props
+		const {loginUser, reset} = this.props
 
 		return loginUser(props).then((res) => {
 			if (res.error) {
@@ -63,10 +63,13 @@ class Login extends Component {
 	}
 
 	render() {
-		const {handleSubmit} = this.props
+		const {handleSubmit, submitting} = this.props
 
 		return (
 			<div className="columns login-column">
+				{submitting
+					? <Loader/>
+					: null}
 				<div className="column is-offset-one-third is-one-third">
 					<h1 className="title has-text-centered">Login</h1>
 					<form onSubmit={handleSubmit(this.onSubmit.bind(this))} className="column">
@@ -86,7 +89,9 @@ class Login extends Component {
 
 Login.propTypes = {
 	loginUser: PropTypes.func,
-	handleSubmit: PropTypes.func
+	reset: PropTypes.func,
+	handleSubmit: PropTypes.func,
+	submitting: PropTypes.bool
 }
 
 const validate = props => {
