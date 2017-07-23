@@ -11,7 +11,6 @@ class Login extends Component {
 		const {loginUser} = this.props
 
 		return loginUser(props).then((res) => {
-			console.log(res)
 			if (res.error) {
 				const validation_msg = res.payload.response.data.messages
 
