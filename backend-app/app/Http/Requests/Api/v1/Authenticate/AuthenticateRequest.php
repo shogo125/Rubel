@@ -27,7 +27,7 @@ class AuthenticateRequest extends FormRequest
     {
         return [
             'email' => 'required|email',
-            'password' => 'required|confirmed'
+            'password' => 'required'
         ];
     }
 
@@ -41,8 +41,7 @@ class AuthenticateRequest extends FormRequest
         return [
             'email.required' => 'A :attribute is required',
             'email.email' => 'The :attribute must be a valid email address.',
-            'password.required' => 'A :attribute has been existed',
-            'password.confirmed' => 'The :attribute confirmation does not match.',
+            'password.required' => 'A :attribute has been existed'
         ];
     }
 
