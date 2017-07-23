@@ -19,8 +19,6 @@ class AuthenticateController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        dd($this->jwt_auth->attempt($credentials));
-
         try {
             if (! $token = $this->jwt_auth->attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 401);
